@@ -3,7 +3,7 @@
 
 ## 📜 과제 설명
 3 Bit LED Counter를 구현하는 과제입니다.  
-Bash 스크립트(`count8`)를 작성하여 LED를 사용한 이진수 카운터를 구현합니다.
+Bash 스크립트(`3_Bit_Counter.sh`)를 작성하여 LED를 사용한 이진수 카운터를 구현합니다.
 <img src="https://github.com/user-attachments/assets/96a0365e-a67f-4197-9cf0-e16ddb8f8061" width="600px">
 
 
