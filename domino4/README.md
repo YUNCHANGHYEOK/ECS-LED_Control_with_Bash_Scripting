@@ -1,29 +1,34 @@
-# 과제 2 - 3비트 LED 카운터 (with Raspberry Pi & Bash Script)
+# 🧩 Mission A - LED Domino (with Raspberry Pi & Bash Script)
+
+## 📜 과제 설명
+4개의 LED를 이용하여 LED가 도미노처럼 순차적으로 켜지고 꺼지는 시스템을 구현합니다.  
+Bash 스크립트(`domino4`)를 작성하여 Raspberry Pi의 GPIO 핀을 통해 LED를 제어합니다.
+
+<img src="https://github.com/user-attachments/assets/f4f5951a-828a-4456-99e0-8a63a726f78e" width="600px">
 
 ## 📺 Youtube 시연 영상 (사진을 클릭하면 영상 재생)
 
-<a href="https://youtu.be/a36LGcD0Ru4">
-  <img src="https://img.youtube.com/vi/a36LGcD0Ru4/hqdefault.jpg" width="600px">
+<a href="https://youtu.be/-sEwysj2Gdg">
+  <img src="https://img.youtube.com/vi/-sEwysj2Gdg/hqdefault.jpg" width="600px">
 </a>
-
 
 ---
 
 ## 🧠 프로젝트 소개
 
 이 프로젝트는 **Raspberry Pi**의 GPIO 핀과 **bash 스크립트**를 활용하여  
-3개의 LED를 사용하여 **0부터 7까지의 숫자를 이진수로 표현하는 카운터 시스템**입니다.
+4개의 LED를 도미노처럼 순차적으로 켜고 끄는 LED 제어 시스템입니다.
 
-스크립트를 실행하면 3개의 LED가 현재 숫자를 이진수로 표시하며,  
-1초마다 숫자가 1씩 증가하면서 LED 상태가 변경됩니다.
+스크립트를 실행하면 4개의 LED가 1초 간격으로 순서대로 켜졌다가 꺼지며,  
+이를 반복하여 도미노처럼 점등 효과를 냅니다.
 
 ---
 
 ## 📦 주요 기능 요약
 
-- 🔢 **숫자 카운팅 (0~7)**
-- 💡 **이진수 LED 표시 (3개의 LED로 표현)**
-- ⏱ **1초마다 자동 카운팅**
+- 🟢 **4개의 LED 제어**
+- ⏱ **1초 간격 LED ON/OFF**
+- 🔁 **순차 점등 및 소등 반복 (도미노 효과)**
 - 📷 **Raspberry Pi GPIO 핀을 통한 LED 제어**
 - 🖥️ **Bash 스크립트로 간단하게 실행**
 
@@ -41,22 +46,23 @@
 
 | 핀 번호  | 역할            | 설명 |
 |--------|----------------|------|
-| **GPIO 18** | LSB (1의 자리)    | 가장 작은 비트를 담당하는 LED |
-| **GPIO 23** | Middle Bit (2의 자리) | 중간 비트를 담당하는 LED |
-| **GPIO 24** | MSB (4의 자리)    | 가장 큰 비트를 담당하는 LED |
+| **GPIO 18** | LED 1 | 첫 번째 LED |
+| **GPIO 23** | LED 2 | 두 번째 LED |
+| **GPIO 24** | LED 3 | 세 번째 LED |
+| **GPIO 25** | LED 4 | 네 번째 LED |
 
 ---
 
 ## 🧩 회로 구성 및 설명
 
-회로는 Raspberry Pi의 GPIO 핀을 통해 3개의 LED를 제어합니다.
+회로는 Raspberry Pi의 GPIO 핀을 통해 4개의 LED를 제어합니다.
 
 - 각 LED는 **330Ω 저항**을 거쳐 브레드보드의 GND에 연결
 - GPIO 핀이 HIGH 출력 상태가 되면 전류가 흐르며 LED가 점등
 
 ### 💡 회로도
 
-
+<img src="https://github.com/user-attachments/assets/73bb7308-16e5-447e-959f-19cbc6b161ca" width="600px">
 
 ---
 
@@ -67,49 +73,44 @@
 ```bash
 #!/usr/bin/bash
 
-# GPIO 핀 번호 설정
-gpio_bit0=18  # LSB (1의 자리)
-gpio_bit1=23  # Middle bit (2의 자리)
-gpio_bit2=24  # MSB (4의 자리)
+# 사용할 GPIO 핀 번호
+pin1=18
+pin2=23
+pin3=24
+pin4=25
 
-# 핀 출력 모드로 설정
-for gpio in $gpio_bit0 $gpio_bit1 $gpio_bit2; do
-    pinctrl set $gpio op
+# 모든 핀을 출력 모드(op)로 설정
+for pin in $pin1 $pin2 $pin3 $pin4; do
+    pinctrl set $pin op
 done
 
-# 무한 루프 시작
+# LED 도미노 점등 (무한 루프)
 while true; do
-    for value in {0..7}; do
-        # 비트 값 계산
-        bit0=$(( value % 2 ))
-        bit1=$(( (value / 2) % 2 ))
-        bit2=$(( (value / 4) % 2 ))
-
-        # LED 제어
-        pinctrl set $gpio_bit0 $( [ $bit0 -eq 1 ] && echo dh || echo dl )
-        pinctrl set $gpio_bit1 $( [ $bit1 -eq 1 ] && echo dh || echo dl )
-        pinctrl set $gpio_bit2 $( [ $bit2 -eq 1 ] && echo dh || echo dl )
-
+    # 순차적으로 LED 켜고 끄기
+    for pin in $pin1 $pin2 $pin3 $pin4; do
+        pinctrl set $pin dh  # LED ON
         sleep 1
+        pinctrl set $pin dl  # LED OFF
     done
 done
 ```
 ---
 
 ## 🧩 코드 설명
+
 - ```#!/usr/bin/bash``` : bash 스크립트로 실행하는 선언
 
-- GPIO 핀 설정 : ```gpio_bit0=18, gpio_bit1=23, gpio_bit2=24```
+- GPIO 핀 설정 : ```pin1=18, pin2=23, pin3=24, pin4=25```
 
 - 핀 출력 모드 설정 : ```pinctrl set <gpio> op``` → 핀을 출력 모드로 전환
 
-- 무한 루프 + 카운팅 : ```while true; do``` → 무한 루프 / ```for value in {0..7}; do``` → 0~7까지 반복
+- 무한 루프 + 순차 점등 : ```while true; do``` → 무한 루프 / ```for pin in $pin1 $pin2 $pin3 $pin4; do``` → 4개의 핀을 순서대로 실행
 
-- 비트 계산 : ```bit0, bit1, bit2``` → 숫자를 이진수로 분해
+- LED 제어 : 
+  - ```pinctrl set $pin dh``` → LED ON
+  - ```sleep 1``` → 1초 대기
+  - ```pinctrl set $pin dl``` → LED OFF
 
-- LED 제어 : 비트가 1이면 ```dh``` (ON), 아니면 ```dl``` (OFF)
-
-- sleep 1 : LED 상태 유지 후 1초 대기
 
 ---
 ## ✨ 주요 기능 상세
