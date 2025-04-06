@@ -1,5 +1,5 @@
 
-# 과제 - 3비트 LED 카운터 (with Raspberry Pi & Bash Script)
+# Mission B - 3비트 LED 카운터 (with Raspberry Pi & Bash Script)
 
 ## 📜 과제 설명
 3 Bit LED Counter를 구현하는 과제입니다.  
