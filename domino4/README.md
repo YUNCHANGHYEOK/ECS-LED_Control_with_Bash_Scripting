@@ -8,8 +8,8 @@ Bash 스크립트(`LED_Domino.sh`)를 작성하여 Raspberry Pi의 GPIO 핀을 �
 
 ## 📺 Youtube 시연 영상 (사진을 클릭하면 영상 재생)
 
-<a href="https://youtu.be/VkxRJS_qOUM">
-  <img src="https://img.youtube.com/vi/VkxRJS_qOUM/hqdefault.jpg" width="600px">
+<a href="https://youtu.be/-sEwysj2Gdg">
+   <img src="https://img.youtube.com/vi/-sEwysj2Gdg/hqdefault.jpg" width="600px">
 </a>
 
 
