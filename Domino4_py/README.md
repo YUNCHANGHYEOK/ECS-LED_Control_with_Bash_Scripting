@@ -8,6 +8,12 @@
 지금은 **Python 코드로 더 간결하고 직관적으로 개선**되었습니다.
 
 ---
+## 📺 Youtube 시연 영상 (사진을 클릭하면 영상 재생)
+
+<a href="https://youtu.be/ha-5o7uz8aM">
+  <img src="https://img.youtube.com/vi/ha-5o7uz8aM/hqdefault.jpg" width="600px">
+</a>
+---
 
 ### 🎯 주요 기능
 - 🟢 4개의 LED 제어
