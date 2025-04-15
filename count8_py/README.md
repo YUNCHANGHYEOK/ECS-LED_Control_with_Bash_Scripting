@@ -11,7 +11,10 @@
 
 ## 📺 Youtube 시연 영상
 
-> 📸 사진 클릭 시 영상으로 이동 (링크 추가 예정)
+<a href="https://youtu.be/VkxRJS_qOUM">
+  <img src="https://img.youtube.com/vi/VkxRJS_qOUM/hqdefault.jpg" width="600px">
+</a>
+
 
 ---
 
