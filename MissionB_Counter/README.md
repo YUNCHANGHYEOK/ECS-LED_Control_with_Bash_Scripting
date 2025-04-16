@@ -13,7 +13,7 @@
 📺 시연 영상 4  
 <a href="https://youtu.be/Bx_S9CV8yT4"> <img src="https://img.youtube.com/vi/Bx_S9CV8yT4/hqdefault.jpg" width="600px"> </a>  
 ---
-## 예제 1: 이진수 카운터 LED
+## 예제 4: 이진수 카운터 LED
 
 **설명:**  
 버튼을 누를 때마다 전역 변수 `counter`가 0부터 15까지 증가하며, 각 LED에 이진수 값을 표시합니다.  
@@ -81,7 +81,7 @@ button.when_pressed = lambda: [led.on() or sleep(0.2) or led.off() for led in le
 
 pause()
 ```
-## 예제 4: LED 상태 토글
+## 예제 1: LED 상태 토글
 설명:
 버튼을 누르면 각 LED의 상태를 토글합니다. (켜져 있으면 끄고, 꺼져 있으면 켭니다.)
 
